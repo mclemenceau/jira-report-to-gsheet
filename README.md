@@ -35,7 +35,7 @@ The script uses the JIRA Python Library to connect to a JIRA instance and retrie
 ### Configuration
 
 1. Create a config.json file with your JIRA and Google Sheets configuration.
-    - Se example in example in the config directory
+    - See example in example in the config directory
   
 2. Obtain OAuth credentials from Google Developers Console for Google Sheets API and save them in the project directory.
     - To enable Google API, Google Drive API and Google Sheet API
