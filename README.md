@@ -24,7 +24,7 @@ The script uses the JIRA Python Library to connect to a JIRA instance and retrie
 
 2. Navigate to the project directory:
     ```bash
-    cd your-repository-name
+    cd jira-report-to-gsheet
     ```
 
 3. Install the required Python packages:
@@ -36,6 +36,7 @@ The script uses the JIRA Python Library to connect to a JIRA instance and retrie
 
 1. Create a config.json file with your JIRA and Google Sheets configuration.
     - Se example in example in the config directory
+  
 2. Obtain OAuth credentials from Google Developers Console for Google Sheets API and save them in the project directory.
     - To enable Google API, Google Drive API and Google Sheet API
     - https://docs.gspread.org/en/latest/oauth2.html#for-end-users-using-oauth-client-id
@@ -43,7 +44,7 @@ The script uses the JIRA Python Library to connect to a JIRA instance and retrie
 ### Usage
 
 Run the script with the following command:
-    ```bash
-    jira_report_to_gsheet -c path_to_config.json
-    ```
+  ```bash
+  jira-report-to-gsheet -c path_to_config.json
+  ```
 Running the script without argument would look for config.json in the current folder
