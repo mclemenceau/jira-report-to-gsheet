@@ -1,0 +1,4 @@
+{
+    "jql": "key in (FR-1000,FR-2000,FR-3000)",
+    "google_sheet": "jira"
+}
