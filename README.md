@@ -22,6 +22,8 @@ At this time this script imports the following information for each Jira issues 
     - Sprint : the last sprints this issue was part of
     - Story Points
 
+Each of this field will be imported in the targeted Google Sheet where each Field will be a column and one line per Jira issue
+
 ## Getting Started
 
 ### Dependencies
