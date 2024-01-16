@@ -6,6 +6,7 @@ from dataclasses import dataclass
 class ReportConfig:
     jql: str
     google_sheet: str
+    google_sheet_name: str
 
     @staticmethod
     def from_json(file_path: str) -> 'ReportConfig':

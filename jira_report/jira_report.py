@@ -74,7 +74,7 @@ def main(args=None):
     gc = gspread.oauth()
     sh = gc.open(config.google_sheet)
 
-    SHEET = sh.sheet1
+    SHEET = sh.worksheet(config.google_sheet_name)
     SHEET.clear()
     SHEET.update("A1:N1", [HEADERS])
 
