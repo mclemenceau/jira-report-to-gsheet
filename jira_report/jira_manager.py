@@ -12,7 +12,6 @@ class JiraManager:
         query: query Jira for a JQL and return a list of Jira Objects
 
     """
-    
     def __init__(self):
         jira_cfg = jira_config()
         self.jira = JIRA(
