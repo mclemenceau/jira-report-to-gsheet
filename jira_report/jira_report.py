@@ -6,6 +6,7 @@ import os
 import gspread
 
 from jira_report.jira_manager import JiraManager
+from jira_report.jira_issue import JiraIssue
 from jira_report.report_config import ReportConfig
 
 
@@ -33,43 +34,27 @@ def main(args=None):
 
     jira_issues = jira.query(config.jql)
 
-    HEADERS = ['Issue Type',
+    HEADERS = ['IssueType',
                'Key',
-               'Fix versions',
+               'FixVersions',
                'Assignee',
-               'Epic Link',
+               'Epic',
                'Summary',
                'Priority',
                'Status',
                'Created',
                'Resolution',
-               'Resolved',
+               'ResolutionDate',
                'Components',
                'Sprint',
-               'Story Points']
+               'StoryPoints']
 
     DATAROOT = "A2"
     DATAEND = "N"
 
     issues_details = []
     for issue in jira_issues:
-        issues_details.append(
-            [issue.fields.issuetype.name,
-             issue.key,
-             ';'.join(version.name for version in issue.fields.fixVersions),
-             issue.fields.assignee.displayName,
-             issue.fields.customfield_10014,            # Epic
-             issue.fields.summary,
-             issue.fields.priority.name,
-             issue.fields.status.name,
-             issue.fields.created,
-             issue.fields.resolution.name if issue.fields.resolution else "",
-             issue.fields.resolutiondate,
-             ';'.join(component.name for component in issue.fields.components),
-             (issue.fields.customfield_10020[-1].name
-              if issue.fields.customfield_10020 else ""),
-             issue.fields.customfield_10024,            # Story Points
-             ])
+        issues_details.append(JiraIssue(issue).fields(HEADERS))
 
     gc = gspread.oauth()
     sh = gc.open(config.google_sheet)
