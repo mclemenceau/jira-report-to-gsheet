@@ -1,4 +1,8 @@
 {
-    "jql": "key in (FR-1000,FR-2000,FR-3000)",
-    "google_sheet": "jira"
+    "jql": "project = FR and sprint in openSprints()",
+	"fields": ["IssueType", "Key", "FixVersions", "Assignee", "Epic", "Summary", "Priority",
+               "Status", "Created", "Resolution", "ResolutionDate", "Components","Sprint", 
+               "StoryPoints"],
+    "google_sheet": "Current Pulse Report - Foundations",
+    "google_sheet_name": "data"
 }

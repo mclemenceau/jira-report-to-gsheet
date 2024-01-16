@@ -34,34 +34,20 @@ def main(args=None):
 
     jira_issues = jira.query(config.jql)
 
-    HEADERS = ['IssueType',
-               'Key',
-               'FixVersions',
-               'Assignee',
-               'Epic',
-               'Summary',
-               'Priority',
-               'Status',
-               'Created',
-               'Resolution',
-               'ResolutionDate',
-               'Components',
-               'Sprint',
-               'StoryPoints']
-
     DATAROOT = "A2"
+    # TODO find the range according the list of fields
     DATAEND = "N"
 
     issues_details = []
     for issue in jira_issues:
-        issues_details.append(JiraIssue(issue).fields(HEADERS))
+        issues_details.append(JiraIssue(issue).fields(config.fields))
 
     gc = gspread.oauth()
     sh = gc.open(config.google_sheet)
 
     SHEET = sh.worksheet(config.google_sheet_name)
     SHEET.clear()
-    SHEET.update("A1:N1", [HEADERS])
+    SHEET.update("A1:N1", [config.fields])
 
     RANGE = f"{DATAROOT}:{DATAEND}{len(issues_details)+1}"
 
