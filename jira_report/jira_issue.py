@@ -1,5 +1,6 @@
 from typing import List
 
+
 class JiraIssue:
 
     def __init__(self, issue):
@@ -7,17 +8,28 @@ class JiraIssue:
         self.field_mappings = {
             "IssueType": lambda: self.issue.fields.issuetype.name,
             "Key": lambda: self.issue.key,
-            "FixVersions": lambda: ';'.join(version.name for version in self.issue.fields.fixVersions),
-            "Assignee": lambda: self.issue.fields.assignee.displayName if self.issue.fields.assignee else "",
+            "FixVersions": lambda:
+                (';'.join(
+                    version.name for version in self.issue.fields.fixVersions
+                    )),
+            "Assignee": lambda:
+                (self.issue.fields.assignee.displayName
+                 if self.issue.fields.assignee else ""),
             "Epic": lambda: self.issue.fields.customfield_10014,
             "Summary": lambda: self.issue.fields.summary,
             "Priority": lambda: self.issue.fields.priority.name,
             "Status": lambda: self.issue.fields.status.name,
             "Created": lambda: self.issue.fields.created,
-            "Resolution": lambda: self.issue.fields.resolution.name if self.issue.fields.resolution else "",
+            "Resolution": lambda:
+                (self.issue.fields.resolution.name
+                 if self.issue.fields.resolution else ""),
             "ResolutionDate": lambda: self.issue.fields.resolutiondate,
-            "Components": lambda: ';'.join(component.name for component in self.issue.fields.components),
-            "Sprint": lambda: self.issue.fields.customfield_10020[-1].name if self.issue.fields.customfield_10020 else "",
+            "Components": lambda:
+                (';'.join(component.name
+                          for component in self.issue.fields.components)),
+            "Sprint": lambda:
+                (self.issue.fields.customfield_10020[-1].name
+                 if self.issue.fields.customfield_10020 else ""),
             "StoryPoints": lambda: self.issue.fields.customfield_10024,
             # Add more fields here as needed
         }
