@@ -6,10 +6,21 @@ This Python script is designed to query JIRA issues and export the details to a 
 
 The script uses the JIRA Python Library to connect to a JIRA instance and retrieve issue data based on a specified JQL (JIRA Query Language) query. The results are then formatted and exported to a specified Google Sheet, allowing for easy viewing and analysis of the data.
 
+## Configuration
+The report can be configured by creating a json configuration file that contains a few fields:
+```json
+{                                                                                 
+    'fields': "List of Jira Properties"
+    'google_sheet': "Name of Google Sheet Document",
+    'google_sheet_name': "Name of the sheet where to import data",
+    'jql': "The Jira request that will return the list of issues"
+}
+```
+### Jira issues properties
 At this time this script imports the following information for each Jira issues part of the JQL results:
- - Issue Type : Bug, Task, Story, ...
+ - IssueType : Bug, Task, Story, ...
  - Key : The Jira unique ID (FR-123)
- - Fix versions
+ - FixVersions
  - Assignee
  - Epic : The Epic ID
  - Summary
@@ -20,7 +31,7 @@ At this time this script imports the following information for each Jira issues 
  - Resolved : date issue was resolved
  - Components : the list of impacted components
  - Sprint : the last sprints this issue was part of
- - Story Points
+ - StoryPoints
 
 Each of this field will be imported in the targeted Google Sheet where each Field will be a column and one line per Jira issue
 
