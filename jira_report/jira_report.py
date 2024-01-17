@@ -3,11 +3,10 @@
 from argparse import ArgumentParser
 import os
 
-import gspread
-
 from jira_report.jira_manager import JiraManager
 from jira_report.jira_issue import JiraIssue
 from jira_report.report_config import ReportConfig
+from jira_report.google_sheet import GoogleSheet
 
 
 def main(args=None):
@@ -34,23 +33,12 @@ def main(args=None):
 
     jira_issues = jira.query(config.jql)
 
-    DATAROOT = "A2"
-    # TODO find the range according the list of fields
-    DATAEND = "N"
-
     issues_details = []
     for issue in jira_issues:
         issues_details.append(JiraIssue(issue).fields(config.fields))
 
-    gc = gspread.oauth()
-    sh = gc.open(config.google_sheet)
-
-    SHEET = sh.worksheet(config.google_sheet_name)
-    SHEET.clear()
-    SHEET.update("A1:N1", [config.fields])
-
-    RANGE = f"{DATAROOT}:{DATAEND}{len(issues_details)+1}"
-
-    SHEET.update(RANGE, issues_details)
+    google_sheet = GoogleSheet(config.google_sheet)
+    google_sheet.set_headers(config.fields)
+    google_sheet.update(config.google_sheet_name, issues_details)
 
     return 0
