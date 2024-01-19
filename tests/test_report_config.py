@@ -6,7 +6,9 @@ from jira_report.report_config import ReportConfig
 # Test data
 valid_config = {
     "jql": "project = FR AND sprint in openSprints()",
-    "google_sheet": "jira"
+    "google_sheet": "jira",
+    "google_sheet_name": "sheet1",
+    "fields": ["IssueType", "Key", "FixVersions"]
 }
 valid_config_json = json.dumps(valid_config)
 
